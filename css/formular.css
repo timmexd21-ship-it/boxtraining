@@ -1,0 +1,153 @@
+/* Eingaben: Zahl, Text, Haken, Regler. Dazu Fehlertext und Zurück-Link. */
+
+body.ohne-leiste .leiste { display: none; }
+body.ohne-leiste #ansicht { padding-bottom: calc(var(--unten) + 24px); }
+
+.eingabe-zeile {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.zahl {
+  width: 3.4em;
+  padding: 2px 0 4px;
+  border: 0;
+  border-bottom: 3px solid var(--bandage);
+  border-radius: 0;
+  background: transparent;
+  color: var(--bandage);
+  font-family: var(--plakat);
+  font-weight: 800;
+  font-size: var(--gr-4);
+  line-height: 1.1;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+.zahl::-webkit-outer-spin-button,
+.zahl::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.zahl:focus-visible { outline: none; border-bottom-color: var(--gong-messing); }
+.einheit { font-size: var(--gr-2); color: var(--hallenbeton); }
+
+.text-eingabe {
+  display: block;
+  width: 100%;
+  min-height: 56px;
+  padding: 14px;
+  border: 0;
+  border-radius: 0;
+  background: var(--sackleder-hell);
+  color: var(--bandage);
+  font-family: var(--lesen);
+  font-size: var(--gr-2);
+  resize: vertical;
+}
+
+/* Große Auswahl untereinander (Auslage) */
+.wahl-hoch { flex-direction: column; }
+.wahl-hoch button { min-height: 76px; text-align: left; padding-left: 18px; }
+/* Zehn Zahlen in zwei Reihen (Anstrengung) */
+.wahl-raster { flex-wrap: wrap; }
+.wahl-raster button { flex: 1 1 calc(20% - 6px); padding: 8px 0; }
+/* Sieben Tage in einer Reihe */
+.wahl-eng { gap: 4px; }
+.wahl-eng button { padding: 8px 0; font-size: var(--gr-1); }
+
+/* Häkchen-Liste */
+.haken-liste { display: flex; flex-direction: column; gap: 6px; }
+.haken {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 60px;
+  padding: 8px 14px;
+  border: 2px solid var(--sackleder-hell);
+  border-radius: 0;
+  background: transparent;
+  color: var(--bandage);
+  font-family: var(--lesen);
+  font-size: var(--gr-2);
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.haken-kasten {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--hallenbeton);
+  font-size: 22px;
+  line-height: 28px;
+  text-align: center;
+}
+.haken[aria-pressed="true"] { border-color: var(--bandage); }
+.haken[aria-pressed="true"] .haken-kasten {
+  background: var(--bandage);
+  border-color: var(--bandage);
+  color: var(--sackleder);
+}
+
+/* Regler */
+.regler-kopf {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: var(--gr-2);
+  font-weight: 700;
+}
+.regler-wert { font-family: var(--plakat); font-size: var(--gr-3); }
+.regler {
+  width: 100%;
+  height: 48px;
+  margin: 0;
+  accent-color: var(--ringseil-rot);
+}
+
+.fehler, .hinweis {
+  margin-top: 20px;
+  padding-left: 12px;
+  border-left: 5px solid var(--gong-messing);
+  font-size: var(--gr-2);
+  max-width: 34ch;
+}
+
+.zurueck {
+  display: block;
+  width: 100%;
+  min-height: 52px;
+  margin-top: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--hallenbeton);
+  font-family: var(--lesen);
+  font-size: var(--gr-2);
+  text-align: left;
+  text-decoration: underline;
+  line-height: 52px;
+  cursor: pointer;
+}
+.unten .knopf { margin-top: 10px; }
+
+/* Zeile im Profil, die man antippen kann */
+.zeilen li:has(.zeile-link) { padding: 0; }
+.zeile-link {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 14px 0;
+  color: inherit;
+  text-decoration: none;
+}
+.zeile-link:active { background: var(--sackleder-hell); }
+
+/* Test: große Uhr */
+.grosse-zeit {
+  margin-top: 28px;
+  font-family: var(--plakat);
+  font-weight: 800;
+  font-size: var(--gr-5);
+  line-height: 1;
+}
+.grosse-zeit.laeuft { color: var(--ringseil-rot); }

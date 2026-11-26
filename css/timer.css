@@ -1,0 +1,208 @@
+/* Timer: Einstellen und die bildschirmfüllende Laufansicht. */
+
+/* ---------- Einstellen ---------- */
+
+.feld {
+  display: block;
+  margin-top: 22px;
+}
+.feld-name {
+  display: block;
+  font-size: var(--gr-1);
+  color: var(--hallenbeton);
+  margin-bottom: 8px;
+}
+
+/* − Wert + */
+.feld-stufen {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.feld-stufen .feld-name {
+  margin: 0;
+  font-size: var(--gr-2);
+  color: var(--bandage);
+}
+.stufen {
+  display: flex;
+  align-items: center;
+}
+.stufe-knopf {
+  width: 60px;
+  height: 60px;
+  border: 0;
+  border-radius: 0;
+  background: var(--sackleder-hell);
+  color: var(--bandage);
+  font-family: var(--lesen);
+  font-size: var(--gr-3);
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.stufe-knopf:active { background: var(--hallenbeton); color: var(--sackleder); }
+.stufe-wert {
+  min-width: 2.6em;
+  text-align: center;
+  font-family: var(--plakat);
+  font-weight: 800;
+  font-size: var(--gr-4);
+  line-height: 1;
+}
+
+/* Eine aus mehreren */
+.wahl {
+  display: flex;
+  gap: 6px;
+}
+.wahl-umbruch { flex-wrap: wrap; }
+.wahl button {
+  flex: 1 1 0;
+  min-height: 56px;
+  padding: 8px 10px;
+  border: 2px solid var(--sackleder-hell);
+  border-radius: 0;
+  background: transparent;
+  color: var(--bandage);
+  font-family: var(--lesen);
+  font-size: var(--gr-2);
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.wahl-umbruch button { flex-basis: calc(50% - 3px); }
+.wahl button[aria-pressed="true"] {
+  background: var(--bandage);
+  border-color: var(--bandage);
+  color: var(--sackleder);
+}
+
+.auswahl {
+  width: 100%;
+  min-height: 56px;
+  padding: 8px 14px;
+  border: 2px solid var(--sackleder-hell);
+  border-radius: 0;
+  background: var(--sackleder);
+  color: var(--bandage);
+  font-family: var(--lesen);
+  font-size: var(--gr-2);
+  font-weight: 700;
+}
+
+/* Neben-Knopf */
+.knopf {
+  display: block;
+  width: 100%;
+  min-height: 56px;
+  margin-top: 22px;
+  padding: 8px 14px;
+  border: 2px solid var(--bandage);
+  border-radius: 0;
+  background: transparent;
+  color: var(--bandage);
+  font-family: var(--lesen);
+  font-size: var(--gr-2);
+  font-weight: 700;
+  text-align: left;
+  text-decoration: none;
+  line-height: 36px;
+  cursor: pointer;
+}
+.knopf:active { background: var(--sackleder-hell); }
+
+/* Start-Balken bleibt über der Leiste stehen */
+.unten.klebt {
+  position: sticky;
+  bottom: calc(var(--leiste-hoehe) + var(--unten));
+  margin-left: calc(-1 * var(--rand));
+  margin-right: calc(-1 * var(--rand));
+  padding: 12px var(--rand);
+  background: var(--sackleder);
+}
+
+/* ---------- Timer läuft: die ganze Fläche zeigt den Zustand ---------- */
+
+.lauf {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--oben) + 24px) var(--rand) calc(var(--unten) + 20px);
+  background: var(--ringboden-blau);
+  color: var(--bandage);
+  font-family: var(--plakat);
+  font-weight: 800;
+  text-transform: uppercase;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.lauf[data-zustand="runde"] { background: var(--ringseil-rot); }
+.lauf[data-zustand="warnung"] { background: var(--gong-messing); color: var(--sackleder); }
+.lauf[data-zustand="ende"] { background: var(--sackleder); }
+
+.lauf-kopf {
+  font-size: var(--gr-4);
+  line-height: 1;
+}
+
+.lauf-zeit {
+  display: flex;
+  margin-top: auto;
+  /* so groß, wie Breite und Höhe es zulassen */
+  font-size: min(54vw, 40vh);
+  line-height: 0.86;
+  letter-spacing: 0;
+}
+.lauf-zeit .ziffer { width: 0.5em; text-align: center; }
+.lauf-zeit .punkt { width: 0.22em; text-align: center; }
+
+.lauf-kombi {
+  min-height: 2.1em;
+  margin-top: 12px;
+  margin-bottom: auto;
+  font-size: min(21vw, var(--gr-5));
+  line-height: 1.05;
+}
+.lauf-kombi .gruppe { display: inline-block; white-space: pre; }
+.lauf-kombi.lang { font-size: min(13vw, 3.5rem); }
+.lauf[data-zustand="ende"] .lauf-kombi { font-size: var(--gr-4); min-height: 0; }
+
+.lauf-knoepfe {
+  display: flex;
+  gap: 12px;
+}
+.lauf-knopf {
+  flex: 1;
+  min-height: 76px;
+  border: 0;
+  border-radius: 0;
+  background: var(--sackleder);
+  color: var(--bandage);
+  font-family: var(--plakat);
+  font-weight: 800;
+  font-size: var(--gr-3);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.lauf[data-zustand="ende"] .lauf-knopf { background: var(--ringseil-rot); }
+.lauf-knopf:active { opacity: 0.8; }
+
+/* Angehalten: Zahl tritt zurück */
+.lauf[data-angehalten] .lauf-zeit,
+.lauf[data-angehalten] .lauf-kombi { opacity: 0.45; }
+
+/* Querformat (Handy liegt quer am Boden) */
+@media (orientation: landscape) and (max-height: 500px) {
+  .lauf-zeit { font-size: min(30vw, 52vh); }
+  .lauf-kombi { min-height: 1.1em; font-size: min(10vw, 20vh); }
+  .lauf-kopf { font-size: var(--gr-3); }
+  .lauf-knopf { min-height: 56px; }
+}

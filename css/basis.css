@@ -1,0 +1,208 @@
+/* Grundlagen: Schriften, Farben, Größen, Seitenaufbau.
+   Entscheidungen dazu stehen in DESIGN-NOTIZEN.md. */
+
+@font-face {
+  font-family: "Big Shoulders Display";
+  src: url("../fonts/bigshoulders-800.woff2") format("woff2");
+  font-weight: 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("../fonts/atkinson-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("../fonts/atkinson-700.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  /* Farben aus der Halle */
+  --sackleder: #231915;
+  --sackleder-hell: #35271f;
+  --bandage: #f1e9d8;
+  --ringseil-rot: #c5301f;
+  --ringboden-blau: #2c4f66;
+  --gong-messing: #d0a22b;
+  --hallenbeton: #8e8a82;
+
+  /* Schrift */
+  --plakat: "Big Shoulders Display", "Arial Narrow", sans-serif;
+  --lesen: "Atkinson Hyperlegible", Verdana, sans-serif;
+  --gr-1: 1rem;      /* 16 */
+  --gr-2: 1.25rem;   /* 20 */
+  --gr-3: 1.75rem;   /* 28 */
+  --gr-4: 2.75rem;   /* 44 */
+  --gr-5: 6rem;      /* 96 */
+
+  /* Maße */
+  --rand: 20px;
+  --leiste-hoehe: 64px;
+  --unten: env(safe-area-inset-bottom, 0px);
+  --oben: env(safe-area-inset-top, 0px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  background: var(--sackleder);
+  color: var(--bandage);
+  font-family: var(--lesen);
+  font-size: 100%;
+  line-height: 1.4;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+
+h1, h2, p { margin: 0; }
+
+:focus-visible {
+  outline: 3px solid var(--gong-messing);
+  outline-offset: 3px;
+}
+#ansicht:focus { outline: none; }
+
+/* ---------- Seitenaufbau ---------- */
+
+#ansicht {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: calc(var(--oben) + 28px) var(--rand) calc(var(--leiste-hoehe) + var(--unten) + 24px);
+}
+
+.kopfzeile {
+  font-size: var(--gr-1);
+  color: var(--hallenbeton);
+}
+
+.titel {
+  font-family: var(--plakat);
+  font-weight: 800;
+  font-size: var(--gr-4);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin-top: 4px;
+}
+
+.absatz {
+  font-size: var(--gr-2);
+  max-width: 32ch;
+  margin-top: 28px;
+}
+
+.leise {
+  font-size: var(--gr-1);
+  color: var(--hallenbeton);
+  margin-top: 12px;
+  max-width: 40ch;
+}
+
+/* Haupt-Aktion: breiter Balken in Daumenhöhe */
+.unten { margin-top: auto; padding-top: 32px; }
+
+.balken {
+  display: block;
+  width: 100%;
+  min-height: 72px;
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 0;
+  background: var(--ringseil-rot);
+  color: var(--bandage);
+  font-family: var(--plakat);
+  font-weight: 800;
+  font-size: var(--gr-3);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-align: left;
+  text-decoration: none;
+  line-height: 48px;
+  cursor: pointer;
+}
+.balken:active { background: #a32618; }
+.balken[disabled] {
+  background: var(--sackleder-hell);
+  color: var(--hallenbeton);
+  cursor: default;
+}
+
+/* Angaben als Zeilen: links was, rechts Wert */
+.zeilen {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+  border-top: 2px solid var(--sackleder-hell);
+}
+.zeilen li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 2px solid var(--sackleder-hell);
+  font-size: var(--gr-2);
+}
+.zeilen .wert { font-weight: 700; text-align: right; }
+.zeilen .wert.gut { color: var(--gong-messing); }
+
+.abschnitt {
+  font-family: var(--plakat);
+  font-weight: 800;
+  font-size: var(--gr-3);
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-top: 40px;
+}
+
+.schritte {
+  margin: 12px 0 0;
+  padding-left: 1.4em;
+  font-size: var(--gr-2);
+}
+.schritte li { padding: 6px 0; }
+
+/* ---------- Leiste unten ---------- */
+
+.leiste {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  display: flex;
+  height: calc(var(--leiste-hoehe) + var(--unten));
+  padding-bottom: var(--unten);
+  background: var(--sackleder);
+  border-top: 2px solid var(--sackleder-hell);
+}
+.leiste a {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--gr-1);
+  font-weight: 700;
+  color: var(--hallenbeton);
+  text-decoration: none;
+  /* Tape-Streifen über dem aktiven Bereich */
+  border-top: 5px solid transparent;
+  margin-top: -2px;
+}
+.leiste a[aria-current="page"] {
+  color: var(--bandage);
+  border-top-color: var(--bandage);
+}
+
+@media (min-width: 400px) {
+  .leiste a { font-size: 1.0625rem; }
+}

@@ -1,0 +1,32 @@
+/* 3D-Figur */
+
+.buehne {
+  position: relative;
+  height: min(50vh, 440px);
+  margin: 16px calc(-1 * var(--rand)) 12px;
+  background: var(--sackleder);
+  border-top: 2px solid var(--sackleder-hell);
+  border-bottom: 2px solid var(--sackleder-hell);
+}
+.buehne canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+/* Pruefbogen: grosse Flaeche fuer viele Standbilder nebeneinander */
+.buehne.bogen {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  height: auto;
+  margin: 0;
+}
+
+/* Viele kleine Wahl-Knöpfe (Liste aller Bewegungen) */
+.wahl-klein button {
+  min-height: 48px;
+  font-size: var(--gr-1);
+  white-space: normal;
+  line-height: 1.15;
+}

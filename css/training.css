@@ -1,0 +1,100 @@
+/* Heute und Trainingsansicht */
+
+.menge {
+  margin-top: 10px;
+  font-family: var(--plakat);
+  font-weight: 800;
+  font-size: var(--gr-4);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--gong-messing);
+}
+.absatz.eng { margin-top: 10px; max-width: 34ch; }
+
+.buehne-klein { height: min(34vh, 300px); margin-bottom: 8px; }
+.buehne[hidden], .wahl[hidden] { display: none; }
+
+/* Was in diesem Block der Reihe nach dran ist */
+.ablauf {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  font-size: var(--gr-2);
+  font-weight: 700;
+}
+.ablauf li { padding: 5px 0; }
+
+/* Technik-Hinweise: Tape-Streifen davor */
+.hinweise {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  font-size: var(--gr-2);
+}
+.hinweise li {
+  padding: 4px 0 4px 16px;
+  border-left: 5px solid var(--bandage);
+  margin-bottom: 6px;
+}
+
+/* Kombi der Woche */
+.kombi-der-woche { margin-top: 22px; }
+.kombi-name { display: block; font-size: var(--gr-1); color: var(--hallenbeton); }
+.kombi-text {
+  display: block;
+  font-family: var(--plakat);
+  font-weight: 800;
+  font-size: var(--gr-4);
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--gong-messing);
+}
+.kombi-text + .kombi-text { font-size: var(--gr-3); margin-top: 4px; }
+
+.platt-knopf { margin: 0 0 10px; }
+.platt-knopf[aria-pressed="true"] {
+  background: var(--ringboden-blau);
+  border-color: var(--ringboden-blau);
+}
+
+/* Link, der wie ein Wahl-Knopf aussieht */
+.wahl-link {
+  flex: 1 1 0;
+  min-height: 56px;
+  border: 2px solid var(--sackleder-hell);
+  color: var(--bandage);
+  font-size: var(--gr-2);
+  font-weight: 700;
+  line-height: 52px;
+  text-align: center;
+  text-decoration: none;
+}
+.wahl-link:active { background: var(--sackleder-hell); }
+
+body.ohne-leiste .unten.klebt { bottom: 0; }
+
+/* ---------- Fortschritt: Testkurven ---------- */
+.kurve { margin-top: 26px; }
+.kurve-kopf {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-size: var(--gr-2);
+}
+.kurve-wert { font-family: var(--plakat); font-weight: 800; font-size: var(--gr-3); white-space: nowrap; }
+.kurve-bild { display: block; width: 100%; height: auto; margin-top: 6px; overflow: visible; }
+.kurve-linie { fill: none; stroke: var(--bandage); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.kurve-punkt { fill: var(--bandage); stroke: var(--sackleder); stroke-width: 2; }
+.kurve-punkt.neu { fill: var(--gong-messing); }
+.kurve-achse { stroke: var(--sackleder-hell); stroke-width: 2; }
+.kurve-text { fill: var(--hallenbeton); font-family: var(--lesen); font-size: 12px; }
+.kurve-bild [role="button"] { cursor: pointer; outline: none; }
+.kurve-bild [role="button"]:focus-visible { stroke: var(--gong-messing); stroke-width: 2; }
+.kurve-anzeige { font-size: var(--gr-1); color: var(--hallenbeton); min-height: 1.4em; }
+.kurve-liste { margin-top: 4px; }
+.kurve-liste summary { min-height: 44px; line-height: 44px; color: var(--hallenbeton); cursor: pointer; }
+.kurve-liste .zeilen { margin-top: 0; }
+.kurve-liste .zeilen li { font-size: var(--gr-1); padding: 10px 0; }
+
+.text-eingabe.gross { margin-top: 12px; font-size: var(--gr-1); }
